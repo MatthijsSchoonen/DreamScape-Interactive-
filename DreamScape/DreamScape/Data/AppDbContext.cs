@@ -51,9 +51,9 @@ namespace DreamScape.Data
             );
 
             modelBuilder.Entity<User>().HasData(
-                new User { Id = 1, UserName = "admin", Email = "admin@example.com", Password = "admin", RoleId = 1 },
-                new User { Id = 2, UserName = "user", Email = "user@example.com", Password = "user", RoleId = 2 }
-            );
+               new User { Id = 1, UserName = "admin", Email = "admin@example.com", Password = SecureHasher.Hash("admin"), RoleId = 1 },
+               new User { Id = 2, UserName = "user", Email = "user@example.com", Password = SecureHasher.Hash("user"), RoleId = 2 }
+           );
 
             modelBuilder.Entity<Item>().HasData(
                 new Item { Id = 1, Name = "Sword", TypeId = 1, RarityId = 1, Power = 10, Speed = 5, Durability = 100, Magic = "None" },
