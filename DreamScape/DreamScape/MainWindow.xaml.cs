@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Data;
 using DreamScape.Model;
 using DreamScape.Views;
+using DreamScape.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -40,5 +41,11 @@ namespace DreamScape
         {
             Frame.Content = new LoginPage(this);
         }
+
+        public void ToRegister()
+        {
+            Frame.Content = new Register(this);
+        }
+
     }
 }

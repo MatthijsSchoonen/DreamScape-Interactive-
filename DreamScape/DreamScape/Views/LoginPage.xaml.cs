@@ -66,5 +66,10 @@ namespace DreamScape.Views
                 ErrorMessage.Text = "Invalid Email or password.";
             }
         }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.ToRegister();
+        }
     }
 }
