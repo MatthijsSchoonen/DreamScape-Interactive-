@@ -45,6 +45,7 @@ namespace DreamScape.Views
             string email = EmailText.Text.ToLower();
             string password = PasswordText.Password;
             string confirmPassWord = PasswordConfirmText.Password;
+            EmailHelper emailHelper = new EmailHelper();
 
             // Validate fields
             if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(confirmPassWord))
@@ -53,7 +54,7 @@ namespace DreamScape.Views
                 return;
             }
 
-            if (!IsValidEmail(email))
+            if (!emailHelper.IsValidEmail(email))
             {
                 ErrorMessage.Text = "Invalid email format.";
                 return;
@@ -100,25 +101,14 @@ namespace DreamScape.Views
             await db.SaveChangesAsync();
 
             // Send mail to user if account created successfully
-            EmailHelper emailHelper = new EmailHelper();
+       
             await emailHelper.ConfirmAccountCreation(email);
 
             // Show account created dialog
             await AccountCreatedDialog.ShowAsync();
         }
 
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch
-            {
-                return false;
-            }
-        }
+   
 
         private bool IsValidPassword(string password)
         {

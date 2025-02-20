@@ -71,5 +71,10 @@ namespace DreamScape.Views
         {
             mainWindow.ToRegister();
         }
+
+        private void ForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.ToPasswordReset();
+        }
     }
 }
