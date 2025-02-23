@@ -47,5 +47,10 @@ namespace DreamScape
             Frame.Content = new Register(this);
         }
 
+        public void ToPasswordReset()
+        {
+            Frame.Content = new PasswordResetPage(this);
+        }
+
     }
 }

@@ -24,7 +24,7 @@
                 <StackPanel Width="350" Background="#00181E"  Padding="35" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
                     <TextBox Margin="20" x:Name="EmailText" PlaceholderText="Email" />
                     <PasswordBox Margin="20" x:Name="PasswordText" PlaceholderText="Password" />
-                    <TextBlock x:Name="ErrorMessage" Foreground="#FF220C" HorizontalAlignment="Center" />
+                    <TextBlock x:Name="ErrorMessage" Foreground="#FF220C" HorizontalAlignment="Center"  TextWrapping="WrapWholeWords"/>
                     <Grid  Margin="0 15 0 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -33,7 +33,7 @@
 
 
 
-                        <Button  Background="#01222b" Foreground="#FF220C" Grid.Column="0" Content=" Forgot Password?"  HorizontalAlignment="left">
+                        <Button  Background="#01222b" Foreground="#FF220C" Grid.Column="0" Content=" Forgot Password?"  HorizontalAlignment="left" Click="ForgotPassword_Click">
                            
                         </Button>
 

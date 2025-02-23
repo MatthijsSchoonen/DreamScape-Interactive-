@@ -62,11 +62,11 @@ namespace DreamScape.Helpers
                     <html>
                         <body>
                             <h1>Password Reset Request</h1>
-                            <p>Click the link below to reset your password:</p>
-                            <a href=""{Code}"">Reset Password</a>
+                            <p>Use this Code to Reset Your Password</p>
+                            <p>{Code}</p>
                         </body>
                     </html>",
-                TextBody = $"Click the link to reset your password: {Code}"
+                TextBody = $"Use this Code to Reset Your Password {Code}"
             };
 
             message.Body = bodyBuilder.ToMessageBody();
@@ -117,6 +117,19 @@ namespace DreamScape.Helpers
             {
                 Console.WriteLine($"Error sending email: {ex.Message}");
                 throw;
+            }
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
             }
         }
     }
