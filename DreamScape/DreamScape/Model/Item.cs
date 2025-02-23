@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DreamScape.Model;
 
 namespace DreamScape.Model
 {
-    class Item
+    public class Item
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,5 +19,9 @@ namespace DreamScape.Model
         public int Speed { get; set; }
         public int Durability { get; set; }
         public string Magic { get; set; }
+
+        // Additional properties to display related item names
+        public string TypeName => Type?.Name;
+        public string RarityName => Rarity?.Name;
     }
 }

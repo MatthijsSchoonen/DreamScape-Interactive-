@@ -14,5 +14,6 @@ namespace DreamScape.Model
         public int ItemId { get; set; }
         public Item Item { get; set; }
         public int Count { get; set; }
+        public bool IsForTrade { get; set; }
     }
 }
