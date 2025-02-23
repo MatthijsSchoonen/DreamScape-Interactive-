@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Views.EditProfilePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00181E" Offset="0"/>
+                <GradientStop Color="#01222B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel  Padding="35" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
+            <Image Source="ms-appx:///Assets/Logo.png" Width="250" />
+            <StackPanel Width="400" Background="#00181E"  Padding="5" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10" Margin="0 20 0 0">
+
+                <StackPanel Width="350" Background="#00181E"  Padding="35" VerticalAlignment="Center" HorizontalAlignment="Center" CornerRadius="10">
+                    
+
+                     <TextBlock Foreground="#FF220C" HorizontalAlignment="Left" FontSize="20">Edit Account Information</TextBlock>
+
+                    <StackPanel Margin="10" >
+                        <TextBlock  Text="Username" Foreground="#FF220C" Margin="0,0,0,5"/>
+                        <TextBox x:Name="UserNameText" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Email" Foreground="#FF220C" Margin="0,0,0,5"/>
+                        <TextBox x:Name="EmailText" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Current Password" Foreground="#FF220C" Margin="0,0,0,5"/>
+                        <PasswordBox x:Name="PasswordText" PlaceholderText="Current Password" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10">
+                        <TextBlock Text="New Password" Foreground="#FF220C" Margin="0,0,0,5"/>
+                        <PasswordBox x:Name="NewPasswordText" PlaceholderText="New Password" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10">
+                        <TextBlock Text="Confirm New Password" Foreground="#FF220C" Margin="0,0,0,5"/>
+                        <PasswordBox x:Name="NewPasswordConfirmText" PlaceholderText="New PasswordConfirm" />
+                    </StackPanel>
+
+
+                    <TextBlock x:Name="ErrorMessage" Foreground="#FF220C" HorizontalAlignment="Center"  TextWrapping="WrapWholeWords"/>
+                    <Grid  Margin="0 15 0 0">          
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button  Background="#01222b" Foreground="#FF220C" Grid.Column="0" Content="Back" Click="Back_click" HorizontalAlignment="Left" Margin="0 15 0 0">
+
+                        </Button>
+
+                        <Button  Background="#01222b" Foreground="#FF220C" Grid.Column="1" Content="Save" Click="Save_Click" HorizontalAlignment="Right" Margin="0 15 0 0">
+
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+
+            </StackPanel>
+        </StackPanel>
+
+        <ContentDialog x:Name="UpdateProfileDialog" Title="Profile Updated" Foreground="#FF220C" RequestedTheme="Dark">
+            <StackPanel >
+                <TextBlock Text="Your account has been Updated successfully!" />
+                <Button Content="OK" Click="UpdateProfileDialog_CloseButtonClick" Background="#00181E" Foreground="#FF220C" HorizontalAlignment="Center" Margin="10" />
+            </StackPanel>
+
+        </ContentDialog>
+    </Grid>
+</Page>
