@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:DreamScape.Views"
+    xmlns:localData="using:DreamScape.Model"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -16,5 +17,84 @@
                 <GradientStop Color="#01222B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+
+        <StackPanel Padding="20">
+            <TextBlock Text="Inventory" HorizontalAlignment="Center" FontSize="24" Foreground="#FF202C" Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <ComboBox x:Name="FilterComboBox" Width="200" PlaceholderText="Filter by Type" SelectionChanged="FilterComboBox_SelectionChanged">
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="Weapons"/>
+                    <ComboBoxItem Content="Armor"/>
+                    <ComboBoxItem Content="Consumables"/>
+                </ComboBox>
+                <ComboBox x:Name="RarityFilterComboBox" Width="200" PlaceholderText="Filter by Rarity" SelectionChanged="RarityFilterComboBox_SelectionChanged" Margin="20,0,0,0">
+                    <ComboBoxItem Content="All"/>
+                    <ComboBoxItem Content="Common"/>
+                    <ComboBoxItem Content="Uncommon"/>
+                    <ComboBoxItem Content="Rare"/>
+                    <ComboBoxItem Content="Epic"/>
+                    <ComboBoxItem Content="Legendary"/>
+                </ComboBox>
+                <ComboBox x:Name="SortComboBox" Width="200" PlaceholderText="Sort by" SelectionChanged="SortComboBox_SelectionChanged" Margin="20,0,0,0">
+                    <ComboBoxItem Content="Name"/>
+                    <ComboBoxItem Content="Type"/>
+                    <ComboBoxItem Content="Stats"/>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Header Row -->
+            <Grid Margin="5,0,0,10" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Name" Foreground="#FF202C" Grid.Column="0" />
+                <TextBlock Text="Type" Foreground="#FF202C" Grid.Column="1"/>
+                <TextBlock Text="Rarity" Foreground="#FF202C" Grid.Column="2"/>
+                <TextBlock Text="Power" Foreground="#FF202C" Grid.Column="3"/>
+                <TextBlock Text="Speed" Foreground="#FF202C" Grid.Column="4"/>
+                <TextBlock Text="Durability" Foreground="#FF202C" Grid.Column="5"/>
+                <TextBlock Text="Magic" Foreground="#FF202C" Grid.Column="6"/>
+                <TextBlock Text="For Trade" Foreground="#FF202C" Grid.Column="7"/>
+                <TextBlock Text="Action" Foreground="#FF202C" Grid.Column="8"/>
+            </Grid>
+
+            <ListView x:Name="InventoryListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:Inventory">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind Item.Name}" Foreground="#FF202C" Grid.Column="0"/>
+                            <TextBlock Text="{x:Bind Item.Type.Name}" Foreground="#FF202C" Grid.Column="1"/>
+                            <TextBlock Text="{x:Bind Item.Rarity.Name}" Foreground="#FF202C" Grid.Column="2"/>
+                            <TextBlock Text="{x:Bind Item.Power}" Foreground="#FF202C" Grid.Column="3"/>
+                            <TextBlock Text="{x:Bind Item.Speed}" Foreground="#FF202C" Grid.Column="4"/>
+                            <TextBlock Text="{x:Bind Item.Durability}" Foreground="#FF202C" Grid.Column="5"/>
+                            <TextBlock Text="{x:Bind Item.Magic}" Foreground="#FF202C" Grid.Column="6"/>
+                            <TextBlock Text="{x:Bind IsForTrade}" Foreground="#FF202C" Grid.Column="7"/>
+                            <Button Content="Toggle Trade" Click="ToggleTrade_Click"  Grid.Column="8"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
     </Grid>
 </Page>
