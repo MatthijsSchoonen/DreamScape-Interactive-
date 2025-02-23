@@ -101,7 +101,7 @@ namespace DreamScape.Views
             }
         }
 
-        private void ResetPassword_Click(object sender, RoutedEventArgs e)
+        private async void ResetPassword_Click(object sender, RoutedEventArgs e)
         {
             ErrorMessage2.Text = "";
             string newPassword = password.Password;
@@ -142,7 +142,8 @@ namespace DreamScape.Views
             db.SaveChanges();
 
             ErrorMessage2.Text = "Password has been reset";
-            mainWindow.ToLogin();
+            // Show Password dialog
+            await PasswordDialog.ShowAsync();
 
         }
         private bool IsValidPassword(string password)
@@ -158,5 +159,15 @@ namespace DreamScape.Views
 
             return true;
         }
+
+        private void PasswordDialog_CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Close the dialog
+            PasswordDialog.Hide();
+
+            // Navigate to login page
+            mainWindow.ToLogin();
+        }
+
     }
 }

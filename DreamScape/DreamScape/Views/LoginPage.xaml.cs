@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Data;
 using DreamScape.Model;
 using Windows.Foundation.Diagnostics;
+using DreamScape.Helpers;
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
@@ -35,7 +36,7 @@ namespace DreamScape.Views
             this.mainWindow = mainWindow;
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
+        private async void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             ErrorMessage.Text = "";
             string email = EmailText.Text;
@@ -53,13 +54,22 @@ namespace DreamScape.Views
                 return;
             }
 
+            if (user == null)
+            {
+                ErrorMessage.Text = "Invalid Email or password.";
+                return;
+            }
+
             failedLoginAttempts++;
             if (failedLoginAttempts >= MaxFailedLoginAttempts)
             {
                 LoginButton.IsEnabled = false;
                 ErrorMessage.Text = "Too many failed login attempts. Please try again later.";
 
+
                 //To send email to user that someone is trying to login to your account
+                EmailHelper emailHelper = new EmailHelper();
+                await emailHelper.SendWarningEmail(user.Email);
             }
             else
             {
