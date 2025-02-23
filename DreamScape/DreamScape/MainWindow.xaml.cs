@@ -39,18 +39,64 @@ namespace DreamScape
 
         public void ToLogin()
         {
+            TopBar.Visibility = Visibility.Collapsed;
             Frame.Content = new LoginPage(this);
         }
 
         public void ToRegister()
         {
+            TopBar.Visibility = Visibility.Collapsed;
             Frame.Content = new Register(this);
         }
 
         public void ToPasswordReset()
         {
+            TopBar.Visibility = Visibility.Collapsed;
             Frame.Content = new PasswordResetPage(this);
         }
 
+
+        public void ToInventory()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new InventoryPage(this);
+        }
+
+        public void ToProFile()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new ProfilePage(this);
+        }
+
+        public void ToEditProfile()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new EditProfilePage(this);
+        }
+
+        private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            // Switch case for navigating between the pages
+            switch (args.SelectedItemContainer.Content.ToString())
+            {
+                case "Inventory":
+                    ToInventory();
+                    break;
+                case "Items":
+                    ToLogin();
+                    break;
+                case "Trades":
+                    ToLogin();
+                    break;
+                default:
+                    ToLogin();
+                    break;
+            }
+        }
+
+        private void Profile_Click(object sender, RoutedEventArgs e)
+        {
+            ToProFile();
+        }
     }
 }

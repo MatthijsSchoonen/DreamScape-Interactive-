@@ -50,7 +50,7 @@ namespace DreamScape.Views
                 MainWindow.LoggedInUser = user;
                 ErrorMessage.Text = "Login Successful.";
                 failedLoginAttempts = 0; // Reset the counter on successful login
-                //add navigation to the main page
+                mainWindow.ToInventory();
                 return;
             }
 
