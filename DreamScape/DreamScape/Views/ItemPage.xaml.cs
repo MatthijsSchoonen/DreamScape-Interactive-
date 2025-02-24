@@ -1,23 +1,37 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls.Primitives;
+using Microsoft.UI.Xaml.Data;
+using Microsoft.UI.Xaml.Input;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using DreamScape.Data;
 using DreamScape.Model;
+using DreamScape.Data;
+using Microsoft.EntityFrameworkCore;
+
+// To learn more about WinUI, the WinUI project structure,
+// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace DreamScape.Views
 {
-    public sealed partial class InventoryPage : Page
+    /// <summary>
+    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// </summary>
+    public sealed partial class ItemPage : Page
     {
         private List<Inventory> allItems;
         private List<Inventory> filteredItems;
         MainWindow mainWindow;
-
-        public InventoryPage(MainWindow mainWindow)
+        public ItemPage(MainWindow mainWindow)
         {
+            this.InitializeComponent();
             this.InitializeComponent();
             this.mainWindow = mainWindow;
             LoadItems();
@@ -32,7 +46,6 @@ namespace DreamScape.Views
                     // Load items from the database for the logged-in user
                     int id = MainWindow.LoggedInUser.Id;
                     allItems = db.Inventories
-                                 .Where(inventory => inventory.UserId == id)
                                  .Include(inventory => inventory.Item)
                                  .ThenInclude(item => item.Type)
                                  .Include(inventory => inventory.Item)
@@ -81,7 +94,7 @@ namespace DreamScape.Views
 
             filteredItems = allItems;
 
-            if (typeFilter != "All" || typeFilter != null)
+            if (typeFilter != "All")
             {
                 filteredItems = filteredItems.Where(inventory => inventory.Item.Type.Name == typeFilter).ToList();
             }

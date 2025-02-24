@@ -74,6 +74,12 @@ namespace DreamScape
             Frame.Content = new EditProfilePage(this);
         }
 
+        public void ToItems()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new ItemPage(this);
+        }
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages
@@ -83,7 +89,7 @@ namespace DreamScape
                     ToInventory();
                     break;
                 case "Items":
-                    ToLogin();
+                    ToItems();
                     break;
                 case "Trades":
                     ToLogin();
