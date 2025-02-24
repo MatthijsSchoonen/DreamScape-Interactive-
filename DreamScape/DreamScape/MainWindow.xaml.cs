@@ -80,6 +80,14 @@ namespace DreamScape
             Frame.Content = new ItemPage(this);
         }
 
+        public void ToEditItems(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new EditItem(this, id);
+        }
+
+
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages
