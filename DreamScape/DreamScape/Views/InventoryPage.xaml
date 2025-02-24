@@ -60,7 +60,7 @@
                 <TextBlock Text="Action" Foreground="#FF202C" Grid.Column="8" HorizontalAlignment="Right"/>
             </Grid>
 
-            <ListView x:Name="InventoryListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center">
+            <ListView x:Name="InventoryListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:Inventory">
                         <Grid>

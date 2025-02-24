@@ -86,7 +86,11 @@ namespace DreamScape
             Frame.Content = new EditItem(this, id);
         }
 
-
+        public void toAddItem()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new AddItem(this);
+        }
 
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {

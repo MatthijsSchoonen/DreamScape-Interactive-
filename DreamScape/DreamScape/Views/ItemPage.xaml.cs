@@ -126,13 +126,18 @@ namespace DreamScape.Views
         private void ToEdit_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            Inventory inventoryItem = button.DataContext as Inventory;
+            Item inventoryItem = button.DataContext as Item;
 
             if (inventoryItem != null)
             {
                 int itemId = inventoryItem.Id;
                 mainWindow.ToEditItems(itemId);
             }
+        }
+
+        private void ToAddItem_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.toAddItem();
         }
     }
 }
