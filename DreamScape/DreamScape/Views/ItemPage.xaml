@@ -88,7 +88,11 @@
                             <TextBlock Text="{x:Bind Speed}" Foreground="#FF202C" Grid.Column="4"/>
                             <TextBlock Text="{x:Bind Durability}" Foreground="#FF202C" Grid.Column="5"/>
                             <TextBlock Text="{x:Bind Magic}" Foreground="#FF202C" Grid.Column="6"/>
-                            <Button Content="Edit" Click="ToEdit_Click"  Grid.Column="7" HorizontalAlignment="Right"/>
+                            <StackPanel Grid.Column="7" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Content="Asign" Click="ToAsign_Click"  HorizontalAlignment="Right"/>
+                                <Button Content="Edit" Click="ToEdit_Click"  HorizontalAlignment="Right"/>
+                            </StackPanel>
+                           
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -92,6 +92,12 @@ namespace DreamScape
             Frame.Content = new AddItem(this);
         }
 
+        public void ToAssignItem(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new AsignItemPage(this, id);
+        }
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages

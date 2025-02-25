@@ -139,5 +139,19 @@ namespace DreamScape.Views
         {
             mainWindow.toAddItem();
         }
+
+        private void ToAsign_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            Item inventoryItem = button.DataContext as Item;
+
+            if (inventoryItem != null)
+            {
+                int itemId = inventoryItem.Id;
+                mainWindow.ToAssignItem(itemId);
+            }
+        }
+
+        
     }
 }
