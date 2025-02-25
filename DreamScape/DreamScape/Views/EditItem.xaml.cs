@@ -109,5 +109,29 @@ namespace DreamScape.Views
             // Navigate to login page
             mainWindow.ToItems();
         }
+        private async void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            using (var db = new AppDbContext())
+            {
+                var itemToDelete = db.Items.FirstOrDefault(i => i.Id == itemId);
+                if (itemToDelete != null)
+                {
+                    db.Items.Remove(itemToDelete);
+                    db.SaveChanges();
+                }
+            }
+
+           await DeletedItemDialog.ShowAsync(); 
+        }
+
+
+        private void DeletedItemDialog_CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Close the dialog
+            DeletedItemDialog.Hide();
+
+            // Navigate to login page
+            mainWindow.ToItems();
+        }
     }
 }

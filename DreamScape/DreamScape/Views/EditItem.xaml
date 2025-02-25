@@ -39,10 +39,12 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Button Background="#01222b" Foreground="#FF220C" Grid.Column="0" Content="Back" Click="Back_click" HorizontalAlignment="Left" Margin="0 5 0 0"/>
-                    <Button Background="#01222b" Foreground="#FF220C" Grid.Column="1" Content="Save" Click="Save_Click" HorizontalAlignment="Right" Margin="0 5 0 0"/>
+                    <Button Background="#01222b" Foreground="#FF220C" Grid.Column="1" Content="Delete" Click="Delete_Click" HorizontalAlignment="Right" Margin="5 5 5 0"/>
+                    <Button Background="#01222b" Foreground="#FF220C" Grid.Column="2" Content="Save" Click="Save_Click" HorizontalAlignment="Right" Margin="0 5 0 0"/>
                 </Grid>
             </StackPanel>
         </StackPanel>
@@ -51,6 +53,14 @@
             <StackPanel >
                 <TextBlock Text="Item has been Updated successfully!" />
                 <Button Content="OK" Click="UpdateItemDialog_CloseButtonClick" Background="#00181E" Foreground="#FF220C" HorizontalAlignment="Center" Margin="10" />
+            </StackPanel>
+
+        </ContentDialog>
+
+        <ContentDialog x:Name="DeletedItemDialog" Title="Item Deleted" Foreground="#FF220C" RequestedTheme="Dark">
+            <StackPanel >
+                <TextBlock Text="Item has been Deleted successfully!" />
+                <Button Content="OK" Click="DeletedItemDialog_CloseButtonClick" Background="#00181E" Foreground="#FF220C" HorizontalAlignment="Center" Margin="10" />
             </StackPanel>
 
         </ContentDialog>
