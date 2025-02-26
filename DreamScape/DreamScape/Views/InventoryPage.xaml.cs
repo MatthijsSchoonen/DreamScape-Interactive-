@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Data;
 using DreamScape.Model;
+using DreamScape.Helpers;
 
 namespace DreamScape.Views
 {
@@ -17,10 +18,27 @@ namespace DreamScape.Views
         MainWindow mainWindow;
 
         public InventoryPage(MainWindow mainWindow)
-        {
+        {           
             this.InitializeComponent();
-            this.mainWindow = mainWindow;
+            this.mainWindow = mainWindow;           
+            LoadDropdowns();
             LoadItems();
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
+        }
+
+     
+
+        private void LoadDropdowns()
+        {
+            using (var db = new AppDbContext())
+            {
+                var types = db.Types.ToList();
+                var rarities = db.Rarities.ToList();
+
+                FilterComboBox.ItemsSource = new List<string> { "All" }.Concat(types.Select(t => t.Name)).ToList();
+                RarityFilterComboBox.ItemsSource = new List<string> { "All" }.Concat(rarities.Select(r => r.Name)).ToList();
+            }
         }
 
         private void LoadItems()
@@ -29,7 +47,6 @@ namespace DreamScape.Views
             {
                 using (AppDbContext db = new AppDbContext())
                 {
-                    // Load items from the database for the logged-in user
                     int id = MainWindow.LoggedInUser.Id;
                     allItems = db.Inventories
                                  .Where(inventory => inventory.UserId == id)
@@ -45,11 +62,9 @@ namespace DreamScape.Views
             }
             catch (Exception ex)
             {
-                // Handle exceptions (e.g., log the error, show a message to the user)
                 Console.WriteLine($"Error loading items: {ex.Message}");
             }
         }
-
 
         private void SortComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -68,35 +83,46 @@ namespace DreamScape.Views
             }
             InventoryListView.ItemsSource = filteredItems;
         }
+
         private void RarityFilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string rarityFilter = (RarityFilterComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
             ApplyFilters();
-        }
-
-        private void ApplyFilters()
-        {
-            string typeFilter = (FilterComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-            string rarityFilter = (RarityFilterComboBox.SelectedItem as ComboBoxItem)?.Content.ToString();
-
-            filteredItems = allItems;
-
-            if (typeFilter != "All")
-            {
-                filteredItems = filteredItems.Where(inventory => inventory.Item.Type.Name == typeFilter).ToList();
-            }
-
-            if (rarityFilter != "All")
-            {
-                filteredItems = filteredItems.Where(inventory => inventory.Item.Rarity.Name == rarityFilter).ToList();
-            }
-
-            InventoryListView.ItemsSource = filteredItems;
         }
 
         private void FilterComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilters();
+        }
+
+        private void NameFilterTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void ApplyFilters()
+        {
+            string typeFilter = FilterComboBox.SelectedItem as string;
+            string rarityFilter = RarityFilterComboBox.SelectedItem as string;
+            string nameFilter = NameFilterTextBox.Text;
+
+            filteredItems = allItems;
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                filteredItems = filteredItems.Where(inventory => inventory.Item.Name.Contains(nameFilter, StringComparison.OrdinalIgnoreCase)).ToList();
+            }
+
+            if (typeFilter != "All" && !string.IsNullOrEmpty(typeFilter))
+            {
+                filteredItems = filteredItems.Where(inventory => inventory.Item.Type.Name == typeFilter).ToList();
+            }
+
+            if (rarityFilter != "All" && !string.IsNullOrEmpty(rarityFilter))
+            {
+                filteredItems = filteredItems.Where(inventory => inventory.Item.Rarity.Name == rarityFilter).ToList();
+            }
+
+            InventoryListView.ItemsSource = filteredItems;
         }
 
         private void ToggleTrade_Click(object sender, RoutedEventArgs e)
@@ -119,7 +145,6 @@ namespace DreamScape.Views
             }
             catch (Exception ex)
             {
-                // Handle exceptions (e.g., log the error, show a message to the user)
                 Console.WriteLine($"Error toggling trade status: {ex.Message}");
             }
         }

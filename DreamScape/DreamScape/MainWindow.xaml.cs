@@ -27,7 +27,7 @@ namespace DreamScape
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public static User LoggedInUser = new User();
+        public static User? LoggedInUser = null;
         public MainWindow()
         {
             this.InitializeComponent();
@@ -74,6 +74,36 @@ namespace DreamScape
             Frame.Content = new EditProfilePage(this);
         }
 
+        public void ToItems()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new ItemPage(this);
+        }
+
+        public void ToEditItems(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new EditItem(this, id);
+        }
+
+        public void toAddItem()
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new AddItem(this);
+        }
+
+        public void ToAssignItem(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new AsignItemPage(this, id);
+        }
+
+        public void ToSpecificItem(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new SpecificItemPage(this, id);
+        }
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages
@@ -83,7 +113,7 @@ namespace DreamScape
                     ToInventory();
                     break;
                 case "Items":
-                    ToLogin();
+                    ToItems();
                     break;
                 case "Trades":
                     ToLogin();
@@ -98,5 +128,7 @@ namespace DreamScape
         {
             ToProFile();
         }
+
+
     }
 }

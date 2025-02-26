@@ -22,19 +22,12 @@
             <TextBlock Text="Inventory" HorizontalAlignment="Center" FontSize="24" Foreground="#FF202C" Margin="0,0,0,20"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <TextBox x:Name="NameFilterTextBox" Width="200" PlaceholderText="Filter by Name" TextChanged="NameFilterTextBox_TextChanged" Margin="0,0,20,0"/>
                 <ComboBox x:Name="FilterComboBox" Width="200" PlaceholderText="Filter by Type" SelectionChanged="FilterComboBox_SelectionChanged">
                     <ComboBoxItem Content="All"/>
-                    <ComboBoxItem Content="Weapons"/>
-                    <ComboBoxItem Content="Armor"/>
-                    <ComboBoxItem Content="Consumables"/>
                 </ComboBox>
                 <ComboBox x:Name="RarityFilterComboBox" Width="200" PlaceholderText="Filter by Rarity" SelectionChanged="RarityFilterComboBox_SelectionChanged" Margin="20,0,0,0">
                     <ComboBoxItem Content="All"/>
-                    <ComboBoxItem Content="Common"/>
-                    <ComboBoxItem Content="Uncommon"/>
-                    <ComboBoxItem Content="Rare"/>
-                    <ComboBoxItem Content="Epic"/>
-                    <ComboBoxItem Content="Legendary"/>
                 </ComboBox>
                 <ComboBox x:Name="SortComboBox" Width="200" PlaceholderText="Sort by" SelectionChanged="SortComboBox_SelectionChanged" Margin="20,0,0,0">
                     <ComboBoxItem Content="Name"/>
@@ -64,10 +57,10 @@
                 <TextBlock Text="Durability" Foreground="#FF202C" Grid.Column="5"/>
                 <TextBlock Text="Magic" Foreground="#FF202C" Grid.Column="6"/>
                 <TextBlock Text="For Trade" Foreground="#FF202C" Grid.Column="7"/>
-                <TextBlock Text="Action" Foreground="#FF202C" Grid.Column="8"/>
+                <TextBlock Text="Action" Foreground="#FF202C" Grid.Column="8" HorizontalAlignment="Right"/>
             </Grid>
 
-            <ListView x:Name="InventoryListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center">
+            <ListView x:Name="InventoryListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:Inventory">
                         <Grid>
@@ -90,7 +83,7 @@
                             <TextBlock Text="{x:Bind Item.Durability}" Foreground="#FF202C" Grid.Column="5"/>
                             <TextBlock Text="{x:Bind Item.Magic}" Foreground="#FF202C" Grid.Column="6"/>
                             <TextBlock Text="{x:Bind IsForTrade}" Foreground="#FF202C" Grid.Column="7"/>
-                            <Button Content="Toggle Trade" Click="ToggleTrade_Click"  Grid.Column="8"/>
+                            <Button Content="Toggle Trade" Click="ToggleTrade_Click"  Grid.Column="8" HorizontalAlignment="Right"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

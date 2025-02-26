@@ -31,6 +31,8 @@ namespace DreamScape.Views
         {
             this.InitializeComponent();
             this.mainWindow = mainWindow;
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
             UserNameText.Text = MainWindow.LoggedInUser.UserName;
             EmailText.Text = MainWindow.LoggedInUser.Email;
         }

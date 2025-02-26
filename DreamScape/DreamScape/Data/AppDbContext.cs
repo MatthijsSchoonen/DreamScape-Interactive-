@@ -37,7 +37,8 @@ namespace DreamScape.Data
 
             modelBuilder.Entity<Model.Type>().HasData(
                 new Model.Type { Id = 1, Name = "Weapon" },
-                new Model.Type { Id = 2, Name = "Armor" }
+                new Model.Type { Id = 2, Name = "Armor" },
+                new Model.Type { Id = 3, Name = "Consumable" }
             );
 
             modelBuilder.Entity<Role>().HasData(
@@ -47,7 +48,10 @@ namespace DreamScape.Data
 
             modelBuilder.Entity<Rarity>().HasData(
                 new Rarity { Id = 1, Name = "Common" },
-                new Rarity { Id = 2, Name = "Rare" }
+                new Rarity { Id = 2, Name = "Uncommon" },
+                new Rarity { Id = 3, Name = "Rare" },
+                new Rarity { Id = 4, Name = "Epic" },
+                new Rarity { Id = 5, Name = "Legendary" }
             );
 
             modelBuilder.Entity<User>().HasData(
@@ -57,7 +61,8 @@ namespace DreamScape.Data
 
             modelBuilder.Entity<Item>().HasData(
                 new Item { Id = 1, Name = "Sword", TypeId = 1, RarityId = 1, Power = 10, Speed = 5, Durability = 100, Magic = "None" },
-                new Item { Id = 2, Name = "Shield", TypeId = 2, RarityId = 2, Power = 5, Speed = 2, Durability = 200, Magic = "None" }
+                new Item { Id = 2, Name = "Shield", TypeId = 2, RarityId = 2, Power = 5, Speed = 2, Durability = 80, Magic = "None" },
+                new Item { Id = 3, Name = "Potion of Light", TypeId = 3, RarityId = 4, Power = 10, Speed = 5, Durability = 1, Magic = "None" }
             );
 
             modelBuilder.Entity<PasswordReset>().HasData(
