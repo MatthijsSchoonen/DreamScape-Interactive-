@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Model;
 using DreamScape.Data;
 using Microsoft.EntityFrameworkCore;
+using DreamScape.Helpers;
 
 namespace DreamScape.Views
 {
@@ -27,9 +28,59 @@ namespace DreamScape.Views
         {
             this.InitializeComponent();
             this.mainWindow = mainWindow;
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
             LoadDropdowns();
             LoadItems();
+
+            if (!userHelper.IsUserAdmin(MainWindow.LoggedInUser))
+            {
+                // Hide add button for non-admin users
+                AddNewItemButton.Visibility = Visibility.Collapsed;
+
+                // Handle the ContainerContentChanging event of the ListView to hide the buttons within the ListView items
+                InventoryListView.ContainerContentChanging += InventoryListView_ContainerContentChanging;
+            }
         }
+
+        private void InventoryListView_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            var container = args.ItemContainer as ListViewItem;
+            if (container != null)
+            {
+                var assignButton = FindControl<Button>(container, "AssignButton");
+                var editButton = FindControl<Button>(container, "EditButton");
+                if (assignButton != null)
+                {
+                    assignButton.Visibility = Visibility.Collapsed;
+                }
+                if (editButton != null)
+                {
+                    editButton.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
+
+        private T FindControl<T>(DependencyObject parent, string controlName) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T control && ((FrameworkElement)child).Name == controlName)
+                {
+                    return control;
+                }
+                var result = FindControl<T>(child, controlName);
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+            return null;
+        }
+
+
+
 
         private void LoadDropdowns()
         {
@@ -140,7 +191,7 @@ namespace DreamScape.Views
             mainWindow.toAddItem();
         }
 
-        private void ToAsign_Click(object sender, RoutedEventArgs e)
+        private void ToAssign_Click(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
             Item inventoryItem = button.DataContext as Item;
@@ -152,6 +203,14 @@ namespace DreamScape.Views
             }
         }
 
-        
+        private void InventoryListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Item clickedItem)
+            {
+                int itemId = clickedItem.Id;
+                mainWindow.ToSpecificItem(itemId);
+            }
+        }
+
     }
 }

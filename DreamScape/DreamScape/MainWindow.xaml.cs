@@ -27,7 +27,7 @@ namespace DreamScape
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        public static User LoggedInUser = new User();
+        public static User? LoggedInUser = null;
         public MainWindow()
         {
             this.InitializeComponent();
@@ -98,6 +98,12 @@ namespace DreamScape
             Frame.Content = new AsignItemPage(this, id);
         }
 
+        public void ToSpecificItem(int id)
+        {
+            TopBar.Visibility = Visibility.Visible;
+            Frame.Content = new SpecificItemPage(this, id);
+        }
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages
@@ -122,5 +128,7 @@ namespace DreamScape
         {
             ToProFile();
         }
+
+
     }
 }

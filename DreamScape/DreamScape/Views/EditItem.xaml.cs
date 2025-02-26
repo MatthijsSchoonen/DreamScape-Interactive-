@@ -4,6 +4,7 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DreamScape.Data;
 using DreamScape.Model;
+using DreamScape.Helpers;
 
 namespace DreamScape.Views
 {
@@ -17,6 +18,8 @@ namespace DreamScape.Views
         {
             this.InitializeComponent();
             this.mainWindow = mainWindow;
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
             this.itemId = itemId;
             LoadDropdowns();
             LoadItem();

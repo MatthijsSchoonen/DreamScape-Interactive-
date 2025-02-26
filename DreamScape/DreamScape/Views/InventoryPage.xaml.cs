@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Data;
 using DreamScape.Model;
+using DreamScape.Helpers;
 
 namespace DreamScape.Views
 {
@@ -17,12 +18,16 @@ namespace DreamScape.Views
         MainWindow mainWindow;
 
         public InventoryPage(MainWindow mainWindow)
-        {
+        {           
             this.InitializeComponent();
-            this.mainWindow = mainWindow;
+            this.mainWindow = mainWindow;           
             LoadDropdowns();
             LoadItems();
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
         }
+
+     
 
         private void LoadDropdowns()
         {

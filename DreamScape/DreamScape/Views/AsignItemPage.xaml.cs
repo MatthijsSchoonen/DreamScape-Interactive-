@@ -6,6 +6,7 @@ using DreamScape.Model;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.EntityFrameworkCore;
+using DreamScape.Helpers;
 
 namespace DreamScape.Views
 {
@@ -18,6 +19,8 @@ namespace DreamScape.Views
         {
             this.InitializeComponent();
             this.mainWindow = mainWindow;
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
             this.ItemId = id;
             LoadItemName();
             LoadUsers();

@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using DreamScape.Data;
 using DreamScape.Model;
+using DreamScape.Helpers;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -31,6 +32,8 @@ namespace DreamScape.Views
         public AddItem(MainWindow mainWindow)
         {
             this.InitializeComponent();
+            UserHelper userHelper = new UserHelper();
+            userHelper.IsUserLoggedIn(MainWindow.LoggedInUser, mainWindow);
             this.mainWindow = mainWindow;
             LoadDropdowns();
         }
