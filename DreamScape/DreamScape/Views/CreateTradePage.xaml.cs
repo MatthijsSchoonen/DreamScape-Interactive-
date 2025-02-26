@@ -2,8 +2,12 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using DreamScape.Model;
 using DreamScape.Data;
+using DreamScape.Helpers;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Windows.UI;
 
 namespace DreamScape.Views
 {
@@ -12,6 +16,7 @@ namespace DreamScape.Views
         MainWindow mainWindow;
         int ItemId;
         int sellerId;
+        EmailHelper emailHelper = new EmailHelper();
 
         public CreateTradePage(MainWindow mainWindow, int itemId, int sellerId)
         {
@@ -42,14 +47,14 @@ namespace DreamScape.Views
             }
         }
 
-        private void CreateTrade_Click(object sender, RoutedEventArgs e)
+        private async void CreateTrade_Click(object sender, RoutedEventArgs e)
         {
             var selectedSellItems = SellItemsListView.SelectedItems.Cast<Item>().ToList();
 
             if (selectedSellItems.Any())
             {
-                using (var dbContext = new AppDbContext())
-                {
+                var dbContext = new AppDbContext();
+                
                     var trade = new Trade
                     {
                         SellerId = sellerId,
@@ -61,9 +66,12 @@ namespace DreamScape.Views
 
                     dbContext.Trades.Add(trade);
                     dbContext.SaveChanges();
+                
+                var seller = dbContext.Users.FirstOrDefault(u => u.Id == sellerId);
+                if (seller != null)
+                {
+                    await emailHelper.SendEmailAsync(seller.Email, "Trade Created", "A new trade has been created and is pending your acceptance.");
                 }
-
-                mainWindow.ToTrades();
             }
         }
     }
