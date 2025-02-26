@@ -32,7 +32,7 @@
                 <TextBlock Text="Item Name" Foreground="#FF202C" Grid.Column="1" HorizontalAlignment="Right"/>
             </Grid>
 
-            <ListView x:Name="UsersListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center">
+            <ListView x:Name="UsersListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center" ItemClick="UsersListView_ItemClick" IsItemClickEnabled="True">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="localData:Inventory">
                         <Grid>

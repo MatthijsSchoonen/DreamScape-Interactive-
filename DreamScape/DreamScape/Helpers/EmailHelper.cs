@@ -98,6 +98,30 @@ namespace DreamScape.Helpers
 
             await SendEmailAsync(message);
         }
+        public async Task SendEmailAsync(string recipientEmail, string subject, string body)
+        {
+            MimeMessage message = new MimeMessage();
+            message.From.Add(new MailboxAddress(SenderName, SenderEmail));
+            message.To.Add(new MailboxAddress("", recipientEmail));
+            message.Subject = subject;
+
+            // Build email body
+            BodyBuilder bodyBuilder = new BodyBuilder
+            {
+                HtmlBody = $@"
+            <html>
+                <body>
+                    <p>{body}</p>
+                </body>
+            </html>",
+                TextBody = body
+            };
+
+            message.Body = bodyBuilder.ToMessageBody();
+
+            await SendEmailAsync(message);
+        }
+
 
         private async Task SendEmailAsync(MimeMessage message)
         {

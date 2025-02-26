@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace DreamScape.Model
 {
-    class Status
+    public class Status
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

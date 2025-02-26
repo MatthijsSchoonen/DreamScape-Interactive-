@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Views.CreateTradePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Views"
+    xmlns:localData="using:DreamScape.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00181E" Offset="0"/>
+                <GradientStop Color="#01222B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Padding="20">
+            <TextBlock Text="Create Trade" Foreground="#ff202c" FontSize="24" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBlock Text="Item to Trade" Foreground="#ff202c" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <TextBlock x:Name="TradeItemTextBlock" Foreground="#ff202c" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+            <TextBlock Text="Select Items to Sell"  Foreground="#ff202c" FontSize="18" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+            <ListView x:Name="SellItemsListView" Foreground="#ff202c" SelectionMode="Multiple" HorizontalAlignment="Center" Width="300" Margin="0,0,0,20">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:Item">
+                        <TextBlock Foreground="#ff202c" Text="{x:Bind Name}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="Create Trade" Click="CreateTrade_Click" Width="150" HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Page>
