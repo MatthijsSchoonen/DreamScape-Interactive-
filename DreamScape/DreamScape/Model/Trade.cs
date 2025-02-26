@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DreamScape.Model
 {
-    class Trade
+    public class Trade
     {
         public int Id { get; set; }
         public int SellerId { get; set; }
@@ -21,5 +21,11 @@ namespace DreamScape.Model
         public ObservableCollection<Item> TradeItem { get; set; }
         public int StatusId { get; set; }
         public Status status { get; set; }
+
+        
+    public string SellItemNames => string.Join(", ", SellItem.Select(i => i.Name));
+        public string TradeItemNames => string.Join(", ", TradeItem.Select(i => i.Name));
     }
+ 
+
 }

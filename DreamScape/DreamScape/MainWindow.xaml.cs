@@ -104,6 +104,17 @@ namespace DreamScape
             Frame.Content = new SpecificItemPage(this, id);
         }
 
+        public void ToCreateTrade(int itemId, int userId)
+        {
+            Frame.Content = new CreateTradePage(this, itemId, userId);
+        }
+
+        public void ToTrades()
+        {
+            Frame.Content = new TradesPage(this);
+        }
+
+
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             // Switch case for navigating between the pages
@@ -116,7 +127,7 @@ namespace DreamScape
                     ToItems();
                     break;
                 case "Trades":
-                    ToLogin();
+                    ToTrades();
                     break;
                 default:
                     ToLogin();

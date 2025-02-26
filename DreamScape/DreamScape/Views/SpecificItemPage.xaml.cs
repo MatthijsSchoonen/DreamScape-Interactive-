@@ -51,5 +51,14 @@ namespace DreamScape.Views
                 }
             }
         }
+
+        private void UsersListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if (e.ClickedItem is Inventory clickedInventory)
+            {
+                mainWindow.ToCreateTrade(clickedInventory.ItemId, clickedInventory.UserId);
+            }
+        }
+
     }
 }

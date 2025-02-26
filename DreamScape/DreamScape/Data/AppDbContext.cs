@@ -31,8 +31,9 @@ namespace DreamScape.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Status>().HasData(
-                new Status { Id = 1, Name = "Active" },
-                new Status { Id = 2, Name = "Inactive" }
+                new Status { Id = 1, Name = "Pending" },
+                new Status { Id = 2, Name = "Declined" },
+                new Status { Id = 3, Name = "Accepted" }
             );
 
             modelBuilder.Entity<Model.Type>().HasData(
@@ -71,7 +72,7 @@ namespace DreamScape.Data
             );
 
             modelBuilder.Entity<Inventory>().HasData(
-                new Inventory { Id = 1, UserId = 1, ItemId = 1, Count = 1 },
+                new Inventory { Id = 1, UserId = 1, ItemId = 1, Count = 1 ,IsForTrade = true },
                 new Inventory { Id = 2, UserId = 2, ItemId = 2, Count = 1 }
             );
 
