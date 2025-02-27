@@ -32,6 +32,7 @@ namespace DreamScape.Helpers
                         <body>
                             <h1>Welcome to DreamScape Interactive!</h1>
                             <p>Thank you for creating an account on DreamScape Interactive.</p>
+                            <p>If the account is created for you you should click on forget password to reset the password.</p>
                             <img src=""cid:logo"" alt=""DreamScape Logo"" />
                         </body>
                     </html>",
