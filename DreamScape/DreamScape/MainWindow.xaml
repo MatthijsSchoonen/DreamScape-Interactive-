@@ -51,6 +51,7 @@
                         <NavigationViewItem Content="Inventory" Foreground="#FF220C"/>
                         <NavigationViewItem Content="Items" Foreground="#FF220C"/>
                         <NavigationViewItem Content="Trades" Foreground="#FF220C"/>
+                        <NavigationViewItem x:Name="UserNav" Visibility="Collapsed" Content="Users" Foreground="#FF220C"/>
                     </NavigationView.MenuItems>
                 </NavigationView>
             </StackPanel>

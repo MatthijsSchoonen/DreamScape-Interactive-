@@ -39,6 +39,7 @@ namespace DreamScape
 
         public void ToLogin()
         {
+            UserNav.Visibility = Visibility.Collapsed;
             TopBar.Visibility = Visibility.Collapsed;
             Frame.Content = new LoginPage(this);
         }
@@ -58,6 +59,10 @@ namespace DreamScape
 
         public void ToInventory()
         {
+            UserHelper userHelper = new UserHelper();
+            if (userHelper.IsUserAdmin(LoggedInUser)) { 
+                UserNav.Visibility= Visibility.Visible;
+            }
             TopBar.Visibility = Visibility.Visible;
             Frame.Content = new InventoryPage(this);
         }
@@ -113,6 +118,21 @@ namespace DreamScape
         {
             Frame.Content = new TradesPage(this);
         }
+        
+        public void toUsers()
+        {
+            Frame.Content = new UserPage(this);
+        }
+
+        public void ToCreateUser()
+        {
+            Frame.Content = new CreateUser(this);
+        }
+
+        public void ToEditUser(int id)
+        {
+            Frame.Content = new EditUser(this, id);
+        }
 
 
         private void HeaderNavigation_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
@@ -128,6 +148,9 @@ namespace DreamScape
                     break;
                 case "Trades":
                     ToTrades();
+                    break;
+                case "Users":
+                    toUsers();
                     break;
                 default:
                     ToLogin();

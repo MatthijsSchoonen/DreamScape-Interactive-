@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Views.UserPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:localData="using:DreamScape.Model"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00181E" Offset="0"/>
+                <GradientStop Color="#01222B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Padding="20">
+            <TextBlock Text="Users" HorizontalAlignment="Center" FontSize="24" Foreground="#FF202C" Margin="0,0,0,20"/>
+            <Button x:Name="AddNewUserButton" Content="Add New User" Click="ToAddUser_Click" Background="#01222B" Foreground="#FF220C" HorizontalAlignment="Right" Margin="0 10"/>
+
+            <!-- Header Row -->
+            <Grid Margin="5,0,0,10" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="UserName" Foreground="#FF202C" Grid.Column="0" />
+                <TextBlock Text="Email" Foreground="#FF202C" Grid.Column="1"/>
+                <TextBlock Text="Role" Foreground="#FF202C" Grid.Column="2"/>
+                <TextBlock Text="Actions" Foreground="#FF202C" Grid.Column="3" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <ListView x:Name="UserListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:User">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind UserName}" Foreground="#FF202C" Grid.Column="0"/>
+                            <TextBlock Text="{x:Bind Email}" Foreground="#FF202C" Grid.Column="1"/>
+                            <TextBlock Text="{x:Bind Role.Name}" Foreground="#FF202C" Grid.Column="2"/>
+                            <StackPanel Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="EditButton" Content="Edit" Click="ToEdit_Click" HorizontalAlignment="Right" Visibility="Visible"/>
+                                <Button x:Name="DeleteButton" Content="Delete" Click="ToDelete_Click" HorizontalAlignment="Right" Visibility="Visible"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
