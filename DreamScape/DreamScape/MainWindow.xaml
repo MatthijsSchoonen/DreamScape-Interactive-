@@ -9,7 +9,60 @@
     mc:Ignorable="d"
     Title="DreamScape">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <Grid>
+        <!-- Define Rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Top bar -->
+            <RowDefinition Height="*"/>
+            <!-- Content frame -->
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Padding="40 0 40 0"
+              x:Name="TopBar"
+              Visibility="Collapsed"
+              Background="#00181E"
+              BorderBrush="#000000" HorizontalAlignment="Stretch" BorderThickness="0,0,0,2"
+              Height="80">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="0"
+                        VerticalAlignment="Center">
+                <Image HorizontalAlignment="Left"
+              
+                    Source="Assets/Logo.png"
+                    Width="44"
+                    Height="44"/>
+
+                <NavigationView x:Name="HeaderNavigation"
+                    Margin="20 0 0 0"
+                    HorizontalAlignment="Left"                  
+                    PaneDisplayMode="Top"
+                    IsSettingsVisible="False"
+                    IsBackButtonVisible="Collapsed"
+                    SelectionChanged="HeaderNavigation_SelectionChanged">
+                    <NavigationView.MenuItems>
+                        <NavigationViewItem Content="Inventory" Foreground="#FF220C"/>
+                        <NavigationViewItem Content="Items" Foreground="#FF220C"/>
+                        <NavigationViewItem Content="Trades" Foreground="#FF220C"/>
+                        <NavigationViewItem x:Name="UserNav" Visibility="Collapsed" Content="Users" Foreground="#FF220C"/>
+                    </NavigationView.MenuItems>
+                </NavigationView>
+            </StackPanel>
+
+            <Button Grid.Column="1" HorizontalAlignment="Right" Width="44" Height="44" Padding="0" BorderThickness="0" Background="Transparent" Click="Profile_Click">
+                <Image Source="/Assets/Profile.png" Width="44" Height="44"/>
+            </Button>
+
+
+        </Grid>
+
+        <Frame Grid.Row="1" x:Name="Frame"></Frame>
+    </Grid>
 </Window>

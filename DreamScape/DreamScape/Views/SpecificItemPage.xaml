@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="DreamScape.Views.SpecificItemPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:DreamScape.Views"
+    xmlns:localData="using:DreamScape.Model"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00181E" Offset="0"/>
+                <GradientStop Color="#01222B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <StackPanel Padding="20">
+            <TextBlock x:Name="PlayerCountTextBlock" HorizontalAlignment="Center" FontSize="20" Foreground="#ff202c" Margin="20"/>
+
+            <TextBlock  HorizontalAlignment="Center" FontSize="20" Foreground="#ff202c" Margin="10">Players Who Want To Trade Item</TextBlock>
+            <!-- Header Row -->
+            <Grid Margin="5,0,0,10" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="User Name" Foreground="#FF202C" Grid.Column="0"/>
+                <TextBlock Text="Item Name" Foreground="#FF202C" Grid.Column="1" HorizontalAlignment="Right"/>
+            </Grid>
+
+            <ListView x:Name="UsersListView" SelectionMode="Single" Margin="0,0,0,20" HorizontalAlignment="Center" ItemClick="UsersListView_ItemClick" IsItemClickEnabled="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="localData:Inventory">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind User.UserName}" Foreground="#FF202C" Grid.Column="0"/>
+                            <TextBlock Text="{x:Bind Item.Name}" Foreground="#FF202C" Grid.Column="1" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    </Grid>
+</Page>
